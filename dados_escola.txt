@@ -1,0 +1,58 @@
+## ALUNO ###########
+cod nome	curso
+92 João		02
+93 Maria	01
+94 Carlos	01
+
+
+## CURSO #########
+cod nome
+01 Informática Subsequente
+02 Mecânica Integrado
+03 Edificações EJA
+
+
+## PROFESSOR ###
+72 Abrahão
+75 Giovane
+79 Fernando
+81 Euza
+87 Demostenes
+
+## DISCIPLINAS ###
+26 Algoritmos
+27 P.O.O.
+28 Banco de Dados
+29 Filosofia
+30 Português
+
+## PROFESSOR_TEM_DISCIPLINA
+idprof	iddisc
+72	26
+72	28
+75	28
+75	27
+81	29
+
+### DISCIPLINA_TEM_ALUNO #######
+26	106
+26	107
+26	108
+26	109
+27	109
+28	109
+29	109
+
+## FUNCIONÁRIO
+cod	nome		gerente
+55	Marta
+56	Pedro		55
+58	Claudia		
+59	Felipe		58
+
+
+
+
+
+
+
