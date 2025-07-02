@@ -4,6 +4,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+
 
 ## CONEXAO COM O BD ########################################
 import mariadb
@@ -125,7 +127,23 @@ class Ui_CadAluno(object):
         
         cursor.execute(sql)
         conexao.commit()
-        print("GRAVADO COM SUCESSO.")
+        
+        #from PyQt5.QtWidgets import QMessageBox
+        
+        msg = QMessageBox()
+        msg.setWindowTitle("Aviso")
+        msg.setText("GRAVADO COM SUCESSO!")
+        msg.exec()
+        
+        # APAGAR OS CAMPOS ###############################
+        
+        self.line_nome.setText("")
+        self.combo_curso.setCurrentIndex(0)
+        self.radio_manha.setChecked(True)
+        self.check_atleta.setChecked(False)
+        self.check_bolsista.setChecked(False)
+        self.text_obs.setPlainText("")
+        
         
 #####################################################################        
 
