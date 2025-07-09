@@ -57,6 +57,9 @@ class Ui_AlteraAluno(object):
         self.gridLayout.addWidget(self.label_turno, 3, 0, 1, 1)
         self.botao_salvar = QtWidgets.QPushButton(self.centralwidget)
         self.botao_salvar.setObjectName("botao_salvar")
+        
+        self.botao_salvar.clicked.connect(self.salvar)
+        
         self.gridLayout.addWidget(self.botao_salvar, 6, 2, 1, 1)
         self.horizontalLayout_turno = QtWidgets.QHBoxLayout()
         self.horizontalLayout_turno.setObjectName("horizontalLayout_turno")
@@ -142,12 +145,45 @@ class Ui_AlteraAluno(object):
             else: self.check_bolsista.setChecked(False)
             
             self.text_obs.setPlainText(dados[6])
-            
-            
-            
-            
         
-
+        
+    def salvar(self):
+        codigo = self.line_codigo.text()
+        
+        nome = self.line_nome.text()
+        curso = self.combo_curso.currentText()
+        
+        turno = ""
+        if self.radio_manha.isChecked()  : turno = "Manhã"
+        elif self.radio_tarde.isChecked(): turno = "Tarde"
+        elif self.radio_noite.isChecked(): turno = "Noite"
+        
+        atleta = "Não"
+        if self.check_atleta.isChecked(): atleta = "Sim"
+                
+        bolsista = "Não"
+        if self.check_bolsista.isChecked(): bolsista = "Sim"
+        
+        obs = self.text_obs.toPlainText()
+        
+        sql = f'''UPDATE aluno SET nome = '{nome}', curso = '{curso}',
+                turno = '{turno}', atleta = '{atleta}', bolsista = '{bolsista}',
+               obs = '{obs}' WHERE codigo = {codigo}; '''
+        cursor.execute(sql)
+        conexao.commit()
+        print("ATUALIZADO COM SUCESSO.")
+            
+            
+        # APAGAR OS CAMPOS ###############################
+        
+        self.line_codigo.setText("")
+        self.line_nome.setText("")
+        self.combo_curso.setCurrentIndex(0)
+        self.radio_manha.setChecked(True)
+        self.check_atleta.setChecked(False)
+        self.check_bolsista.setChecked(False)
+        self.text_obs.setPlainText("")    
+        
 
 if __name__ == "__main__":
     import sys
